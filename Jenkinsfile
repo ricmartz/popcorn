@@ -11,5 +11,11 @@ pipeline {
         sh 'docker build -t popcorn:$BUILD_NUMBER .'
       }
     }
+    stage('push docker') {
+      steps {
+        sh '''docker login - u ricmart -p ____
+docker push ricmart/popcorn:$BUILD_NUMBER'''
+      }
+    }
   }
 }
