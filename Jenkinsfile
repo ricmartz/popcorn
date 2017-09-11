@@ -1,24 +1,28 @@
 pipeline {
   agent any
   
-  environment {DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')}
-  
+  environment {
+    DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+  }
   
   stages {
-    stage('greetings') {
+    stage('greeting') {
       steps {
-        sh 'echo "Hello World"'
+        sh '''echo "hello world"
+'''
       }
     }
     stage('build docker') {
       steps {
-        sh 'docker build -t popcorn:$BUILD_NUMBER .'
+        sh '''docker build -t chyld/popcorn:$BUILD_NUMBER .
+'''
       }
     }
-    stage('push docker') {
+    stage('docker push') {
       steps {
-        sh '''docker login - u ricmart -p $DOCKER_PASSWORD
-docker push ricmart/popcorn:$BUILD_NUMBER'''
+        sh '''docker login -u chyld -p $DOCKER_PASSWORD
+docker push chyld/popcorn:$BUILD_NUMBER
+'''
       }
     }
   }
