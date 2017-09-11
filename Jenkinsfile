@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  
+  environment {DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')}
+  
+  
   stages {
     stage('greetings') {
       steps {
@@ -13,7 +17,7 @@ pipeline {
     }
     stage('push docker') {
       steps {
-        sh '''docker login - u ricmart -p ____
+        sh '''docker login - u ricmart -p $DOCKER_PASSWORD
 docker push ricmart/popcorn:$BUILD_NUMBER'''
       }
     }
