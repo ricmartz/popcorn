@@ -11,10 +11,18 @@ pipeline {
         sh '''echo "hello world"
 '''
       }
+
+stages {
+    stage('testing') {
+      steps {
+        sh '''rails test
+'''
+      }      
+      
     }
     stage('build docker') {
       steps {
-        sh '''docker build -t chyld/popcorn:$BUILD_NUMBER .
+        sh '''docker build -t ricmart/popcorn:$BUILD_NUMBER .
 '''
       }
     }
