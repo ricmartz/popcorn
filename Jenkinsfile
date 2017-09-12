@@ -20,7 +20,7 @@ pipeline {
     }
     stage('docker push') {
       steps {
-        sh '''docker login -u chyld -p $DOCKER_PASSWORD
+        sh '''docker login -u ricmart -p $DOCKER_PASSWORD
 docker push chyld/popcorn:$BUILD_NUMBER
 '''
       }
