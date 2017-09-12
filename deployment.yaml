@@ -24,7 +24,7 @@ spec:
 
       - name: web
 
-        image: ricmart/popcorn:13
+        image: ricmart/popcorn:14
 
         ports:
 
