@@ -26,19 +26,17 @@ pipeline {
     }
     stage('docker push') {
       steps {
-        sh '''docker login -u ricmart -p $DOCKER_PASSWORD
+        sh '''docker login -u chyld -p $DOCKER_PASSWORD
 docker push ricmart/popcorn:$BUILD_NUMBER
 '''
       }
-
-  }
-    stage('deploy to k8's') {
+    }
+    stage('deply to k8s') {
       steps {
         sh '''envsubst < deployment.yaml | kubectl apply -f -
-docker push ricmart/popcorn:$BUILD_NUMBER
 '''
-      }      
-      
+      }
     }
   }
 }
+
