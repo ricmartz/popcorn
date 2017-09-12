@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  
-  environment {
-    DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
-  }
-  
   stages {
     stage('greeting') {
       steps {
@@ -29,9 +24,12 @@ stages {
     stage('docker push') {
       steps {
         sh '''docker login -u ricmart -p $DOCKER_PASSWORD
-docker push chyld/popcorn:$BUILD_NUMBER
+docker push ricmart/popcorn:$BUILD_NUMBER
 '''
       }
     }
+  }
+  environment {
+    DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
   }
 }
