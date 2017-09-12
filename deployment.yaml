@@ -13,34 +13,20 @@ spec:
     web: rails
 
 ---
+
 apiVersion: apps/v1beta1
-
 kind: Deployment
-
 metadata:
-
   name: d-web
-
 spec:
-
   replicas: 3
-
   template:
-
     metadata:
-
       labels:
-
         web: rails
-
     spec:
-
       containers:
-
       - name: web
-
-        image: ricmart/popcorn:14
-
+        image: ricmart/popcorn:$BUILD_NUMBER
         ports:
-
         - containerPort: 3333
