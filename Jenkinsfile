@@ -30,6 +30,15 @@ pipeline {
 docker push ricmart/popcorn:$BUILD_NUMBER
 '''
       }
+
+  }
+    stage('deploy to k8's') {
+      steps {
+        sh '''envsubst < deployment.yaml | kubectl apply -f -
+docker push ricmart/popcorn:$BUILD_NUMBER
+'''
+      }      
+      
     }
   }
 }
